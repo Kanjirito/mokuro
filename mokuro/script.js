@@ -6,22 +6,7 @@ let showAboutOnStart = false;
 
 let storageKey = "mokuro_" + window.location.pathname;
 
-let defaultState = {
-    page_idx: 0,
-    page2_idx: -1,
-    hasCover: false,
-    r2l: true,
-    singlePageView: false,
-    ctrlToPan: false,
-    textBoxBorders: false,
-    editableText: false,
-    displayOCR: true,
-    fontSize: "auto",
-    eInkMode: false,
-    defaultZoomMode: "fit to screen",
-    toggleOCRTextBoxes: false,
-    backgroundColor: '#C4C3D0',
-};
+let defaultState = JSON.parse(document.getElementById('defaultState').text);;
 
 let state = JSON.parse(JSON.stringify(defaultState));
 

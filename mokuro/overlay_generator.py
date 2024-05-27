@@ -1,3 +1,4 @@
+import json
 import shutil
 from pathlib import Path
 from urllib.parse import quote
@@ -43,10 +44,12 @@ ABOUT_DEMO = ABOUT + """
 
 class OverlayGenerator:
     def __init__(self,
+                 default_state,
                  pretrained_model_name_or_path='kha-white/manga-ocr-base',
                  force_cpu=False,
                  disable_ocr=False,
                  **kwargs):
+        self.default_state = default_state
         self.pretrained_model_name_or_path = pretrained_model_name_or_path
         self.force_cpu = force_cpu
         self.kwargs = kwargs
@@ -150,6 +153,9 @@ class OverlayGenerator:
 
                     with tag('a', id='rightAPage', href='#'):
                         pass
+
+                with tag('script', id='defaultState', type='application/json'):
+                    text(json.dumps(self.default_state))
 
                 if as_one_file:
                     with tag('script'):

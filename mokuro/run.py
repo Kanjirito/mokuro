@@ -15,6 +15,23 @@ def run(*paths,
         disable_confirmation=False,
         disable_ocr=False,
         ):
+
+    default_state = {
+        'page_idx': 0,
+        'page2_idx': -1,
+        'hasCover': False,
+        'r2l': True,
+        'singlePageView': False,
+        'ctrlToPan': False,
+        'textBoxBorders': False,
+        'editableText': False,
+        'displayOCR': True,
+        'fontSize': 'auto',
+        'eInkMode': False,
+        'defaultZoomMode': 'fit to screen',
+        'toggleOCRTextBoxes': False,
+        'backgroundColor': '#C4C3D0',
+    }
     
     if disable_ocr:
         logger.info('Running with OCR disabled')
@@ -41,7 +58,12 @@ def run(*paths,
         if inp.lower() not in ('y', 'yes'):
             return
 
-    ovg = OverlayGenerator(pretrained_model_name_or_path=pretrained_model_name_or_path, force_cpu=force_cpu, disable_ocr=disable_ocr)
+    ovg = OverlayGenerator(
+        default_state,
+        pretrained_model_name_or_path=pretrained_model_name_or_path,
+        force_cpu=force_cpu,
+        disable_ocr=disable_ocr
+    )
 
     num_sucessful = 0
     for i, path in enumerate(paths):
