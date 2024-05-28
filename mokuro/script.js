@@ -28,7 +28,7 @@ function loadState() {
 function updateUI() {
     document.getElementById("menuR2l").checked = state.r2l;
     document.getElementById("menuCtrlToPan").checked = state.ctrlToPan;
-    document.getElementById("menuDoublePageView").checked = !state.singlePageView;
+    document.getElementById("menuDoublePageView").checked = state.doublePageView;
     document.getElementById("menuHasCover").checked = state.hasCover;
     document.getElementById("menuTextBoxBorders").checked = state.textBoxBorders;
     document.getElementById("menuEditableText").checked = state.editableText;
@@ -169,7 +169,7 @@ document.getElementById('menuCtrlToPan').addEventListener('click', function () {
 }, false);
 
 document.getElementById('menuDoublePageView').addEventListener('click', function () {
-    state.singlePageView = !document.getElementById("menuDoublePageView").checked;
+    state.doublePageView = document.getElementById("menuDoublePageView").checked;
     saveState();
     updatePage(state.page_idx);
 }, false);
@@ -314,7 +314,7 @@ document.addEventListener("keydown", function onEvent(e) {
 });
 
 function isPageFirstOfPair(page_idx) {
-    if (state.singlePageView) {
+    if (!state.doublePageView) {
         return true;
     } else {
         if (state.hasCover) {
@@ -445,7 +445,7 @@ function updatePage(new_page_idx) {
     getPage(state.page_idx).style.display = "inline-block";
     getPage(state.page_idx).style.order = 2;
 
-    if (!state.singlePageView && state.page_idx < num_pages - 1 && !isPageFirstOfPair(state.page_idx + 1)) {
+    if (state.doublePageView && state.page_idx < num_pages - 1 && !isPageFirstOfPair(state.page_idx + 1)) {
         state.page2_idx = state.page_idx + 1;
         getPage(state.page2_idx).style.display = "inline-block";
 
@@ -480,11 +480,11 @@ function lastPage() {
 }
 
 function prevPage() {
-    updatePage(state.page_idx - (state.singlePageView ? 1 : 2));
+    updatePage(state.page_idx - (!state.doublePageView ? 1 : 2));
 }
 
 function nextPage() {
-    updatePage(state.page_idx + (state.singlePageView ? 1 : 2));
+    updatePage(state.page_idx + (!state.doublePageView ? 1 : 2));
 }
 
 function inputLeftLeft() {
