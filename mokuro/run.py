@@ -24,6 +24,27 @@ def run(*paths,
         eink_mode=False,
         textbox_click_toggle=False,
         ):
+    """
+    Process manga volumes with mokuro.
+
+    Args:
+        path(s): Paths to manga volumes
+        parent_dir: Parent directory to scan for volumes. If provided, all volumes inside this directory will be processed.
+        pretrained_model_name_or_path: Name or path of the manga-ocr model.
+        force_cpu: Force the use of CPU even if CUDA is available.
+        as_one_file: If False, generate separate CSS and JS files instead of embedding them in the HTML file.
+        disable_confirmation: Disable confirmation prompt. If False,the user will be prompted to confirm the list of volumes to be processed.
+        disable_ocr: Disable OCR processing. Generate files without OCR results.
+        right_to_left: Toggle the reader default for right to left reading.
+        double_page_view: Toggle the reader default for double page view.
+        has_cover: Toggle the reader default for "first page is cover"
+        ctrl_to_pan: Toggle the reader default for Ctrl+Mouse to pan.
+        display_ocr: Toggle the reader default for OCR text display.
+        textbox_borders: Toggle the reader default for OCR text box border display.
+        editable_text: Toggle the reader default for editable text.
+        eink_mode: Toggle the reader default for e-ink mode.
+        textbox_click_toggle: Toggle the reader default for text box visibility toggling.
+    """
 
     default_state = {
         'page_idx': 0,
