@@ -21,6 +21,7 @@ def run(*paths,
         display_ocr=True,
         textbox_borders=False,
         editable_text=False,
+        text_size=0,
         eink_mode=False,
         textbox_click_toggle=False,
         ):
@@ -28,7 +29,7 @@ def run(*paths,
     Process manga volumes with mokuro.
 
     Args:
-        path(s): Paths to manga volumes
+        paths: Path(s) to manga volumes
         parent_dir: Parent directory to scan for volumes. If provided, all volumes inside this directory will be processed.
         pretrained_model_name_or_path: Name or path of the manga-ocr model.
         force_cpu: Force the use of CPU even if CUDA is available.
@@ -42,6 +43,7 @@ def run(*paths,
         display_ocr: Toggle the reader default for OCR text display.
         textbox_borders: Toggle the reader default for OCR text box border display.
         editable_text: Toggle the reader default for editable text.
+        text_size: Toggle the reader default font size. 0 for auto.
         eink_mode: Toggle the reader default for e-ink mode.
         textbox_click_toggle: Toggle the reader default for text box visibility toggling.
     """
@@ -57,7 +59,7 @@ def run(*paths,
         'displayOCR': display_ocr,
         'textBoxBorders': textbox_borders,
         'editableText': editable_text,
-        'fontSize': 'auto',
+        'fontSize': str(text_size),
         'eInkMode': eink_mode,
         'toggleOCRTextBoxes': textbox_click_toggle,
         'backgroundColor': '#C4C3D0',

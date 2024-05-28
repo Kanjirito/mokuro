@@ -236,6 +236,20 @@ class OverlayGenerator:
                 with tag('input', type='color',  value=value, id=id_):
                     pass
 
+        def option_numer(id_, text_content, value):
+            with tag('label', klass='dropdown-option'):
+                text(text_content)
+                with tag(
+                    'input',
+                    id=id_,
+                    type='number',
+                    value=value,
+                    min=0,
+                    step=1,
+                    size=4
+                ):
+                    pass
+
         with tag('div', klass='dropdown'):
             with tag('button', id='dropbtn', klass='menuButton'):
                 doc.asis(self.get_icon('menu-hamburger-svgrepo-com'))
@@ -264,8 +278,7 @@ class OverlayGenerator:
                 option_toggle('menuDisplayOCR', 'OCR enabled ')
                 option_toggle('menuTextBoxBorders', 'display boxes outlines ')
                 option_toggle('menuEditableText', 'editable text ')
-                option_select('menuFontSize', 'font size: ',
-                              ['auto', 9, 10, 11, 12, 14, 16, 18, 20, 24, 32, 40, 48, 60])
+                option_numer('menuFontSize', 'font size (0 for auto): ', 0)
                 option_toggle('menuEInkMode', 'e-ink mode ')
                 option_toggle('menuToggleOCRTextBoxes', 'toggle OCR text boxes on click')
                 option_color('menuBackgroundColor', 'background color', '#C4C3D0')

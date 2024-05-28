@@ -139,7 +139,7 @@ function updateProperties() {
     }
 
 
-    if (state.fontSize === 'auto') {
+    if (state.fontSize === '0') {
         pc.classList.remove('textBoxFontSizeOverride');
     } else {
         r.style.setProperty('--textBoxFontSize', state.fontSize + 'pt');
@@ -249,9 +249,11 @@ document.getElementById('dimOverlay').addEventListener('click', function () {
 }, false);
 
 document.getElementById('menuFontSize').addEventListener('change', (e) => {
-    state.fontSize = e.target.value;
-    saveState();
-    updateProperties();
+    if (e.target.value !== '') {
+        state.fontSize = e.target.value;
+        saveState();
+        updateProperties();
+    }
 });
 
 document.getElementById('menuDefaultZoom').addEventListener('change', (e) => {
